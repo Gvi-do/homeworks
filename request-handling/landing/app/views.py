@@ -11,22 +11,34 @@ counter_click = Counter()
 
 
 def index(request):
-    # Реализуйте логику подсчета количества переходов с лендига по GET параметру from-landing
+    click = []
+    if request.GET['from-landing'] == 'original':
+        click.append('original')
+        counter_click.update(click)
+    elif request.GET['from-landing'] == 'test':
+        click.append('test')
+        counter_click.update(click)
+
     return render(request, 'index.html')
 
 
 def landing(request):
-    # Реализуйте дополнительное отображение по шаблону app/landing_alternate.html
-    # в зависимости от GET параметра ab-test-arg
-    # который может принимать значения original и test
-    # Так же реализуйте логику подсчета количества показов
-    return render(request, 'landing.html')
-
+    show = []
+    if request.GET['ab-test-arg'] == 'original':
+        show.append('original')
+        counter_show.update(show)
+        return render(request, 'landing.html')
+    else:
+        show.append('test')
+        counter_show.update(show)
+        return render(request, 'landing_alternate.html')
 
 def stats(request):
     # Реализуйте логику подсчета отношения количества переходов к количеству показов страницы
     # Для вывода результат передайте в следующем формате:
+    test_stats = counter_click['test'] / counter_show['test']
+    original_stats = counter_click['original'] / counter_show['original']
     return render(request, 'stats.html', context={
-        'test_conversion': 0.5,
-        'original_conversion': 0.4,
+        'test_conversion': test_stats,
+        'original_conversion': original_stats,
     })

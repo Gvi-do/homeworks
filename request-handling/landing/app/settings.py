@@ -76,7 +76,7 @@ STATICFILES_DIRS = [
 ]
 
 SECRET_KEY = 'put your secret here'
-DEBUG = True
+DEBUG = False
 
 try:
     from .settings_local import *
