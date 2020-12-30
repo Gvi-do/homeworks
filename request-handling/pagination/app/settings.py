@@ -84,3 +84,5 @@ try:
     from .settings_local import *
 except ImportError:
     pass
+
+ITEM_PER_PAGE = 10
