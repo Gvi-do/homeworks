@@ -36,8 +36,15 @@ def landing(request):
 def stats(request):
     # Реализуйте логику подсчета отношения количества переходов к количеству показов страницы
     # Для вывода результат передайте в следующем формате:
-    test_stats = counter_click['test'] / counter_show['test']
-    original_stats = counter_click['original'] / counter_show['original']
+    if counter_show['test'] != 0:
+        test_stats = counter_click['test'] / counter_show['test']
+    else:
+        test_stats = 0
+    if counter_show['original'] != 0:
+        original_stats = counter_click['original'] / counter_show['original']
+    else:
+        original_stats = 0
+
     return render(request, 'stats.html', context={
         'test_conversion': test_stats,
         'original_conversion': original_stats,
