@@ -1,3 +1,5 @@
+{% load app_tags %}
+
 <!DOCTYPE html>{% load static %}
 <html>
   <head>
@@ -17,9 +19,26 @@
       <div class="row">
         <h1 class="col s12">Инфляция в России</h1>
         <div class="col s12 m8">
-        
-        <!-- Ваша логика -->
-
+          <table>
+            <thead>
+              <tr>
+                {% for i in th %}
+                  <th>
+                    {{ i }}
+                  </th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for year in td %}
+                <tr>
+                  {% for elem in year %}
+                    {{ elem|check_color }}
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     {% endblock %}
