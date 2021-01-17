@@ -29,13 +29,19 @@
                 {% endfor %}
               </tr>
             </thead>
-            <tbody>
+            <tr>
               {% for year in td %}
-                <tr>
+                  <tr>
                   {% for elem in year %}
-                    {{ elem|check_color }}
+                    {% if forloop.first %}
+                      <td style="background:white">{{ elem }}</td>
+                    {% elif forloop.last %}
+                      <td style="background:grey">{{ elem }}</td>
+                    {% else %}
+                      {{ elem|check_color }}
+                    {% endif %}
                   {% endfor %}
-                </tr>
+                  </tr>
               {% endfor %}
             </tbody>
           </table>
